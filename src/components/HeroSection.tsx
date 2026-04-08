@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { Button } from "#/components/ui/button";
 
 const rotatingTexts = [
-	"Digitally Delivered",
-	"Beautifully Designed",
-	"Easily Customizable",
+	"Dikirim Secara Digital",
+	"Desain Menawan",
+	"Mudah Dikustomisasi",
 ];
 
 export default function HeroSection() {
@@ -24,7 +25,7 @@ export default function HeroSection() {
 	}, []);
 
 	return (
-		<section className="relative overflow-hidden bg-background py-20 md:py-32">
+		<section id="home" className="relative overflow-hidden bg-gradient-to-b from-background to-secondary/5 py-20 md:py-32 dark:bg-background">
 			{/* Background decoration */}
 			<div className="absolute inset-0 -z-10">
 				<div className="absolute right-0 top-0 h-[500px] w-[500px] translate-x-1/3 translate-y--1/4 rounded-full bg-secondary/20 blur-3xl" />
@@ -39,15 +40,15 @@ export default function HeroSection() {
 							<span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
 							<span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
 						</span>
-						Beautiful invitations, effortlessly crafted
+						Undangan cantik, dibuat dengan mudah
 					</div>
 
 					{/* Heading */}
 					<h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
-						<span className="block">Your Dream Wedding,</span>
+						<span className="block">Pernikahan Impianmu,</span>
 						<span className="relative mt-2 inline-block">
 							<span
-								className={`relative z-10 inline-block text-primary transition-all duration-300 dark:[--glow-a:0.15] dark:[--glow-b:0.08] dark:[--glow-c:0.04] dark:[--glow-d:0.1] ${
+								className={`relative z-10 inline-block text-primary transition-all duration-300 dark:[--glow-a:0.08] dark:[--glow-b:0.04] dark:[--glow-c:0.02] dark:[--glow-d:0.05] ${
 									isAnimating
 										? "translate-y-2 opacity-0"
 										: "translate-y-0 opacity-100"
@@ -72,18 +73,25 @@ export default function HeroSection() {
 
 					{/* Description */}
 					<p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground sm:mt-6 sm:text-lg md:text-xl">
-						Create stunning digital wedding invitations that your guests will
-						love. Choose from elegant templates, customize every detail, and
-						send with a single click.
+						Buat undangan pernikahan digital yang memukau dan mudah dibagikan.
+						Pilih template elegan, sesuaikan dengan gaya Anda, dan kirimkan
+						dalam satu klik.
 					</p>
 
 					{/* CTA Buttons */}
 					<div className="mt-8 flex flex-col items-center justify-center gap-4 sm:mt-10 sm:flex-row">
-						<Button size="lg" className="w-full sm:w-auto">
-							Create Your Invitation
-						</Button>
-						<Button variant="outline" size="lg" className="w-full sm:w-auto">
-							View Templates
+						<Link to="/dashboard">
+							<Button size="lg">Buat Undangan</Button>
+						</Link>
+						<Button
+							variant="outline"
+							size="lg"
+							onClick={() => {
+								const el = document.querySelector("#product");
+								if (el) el.scrollIntoView({ behavior: "smooth" });
+							}}
+						>
+							Lihat Template
 						</Button>
 					</div>
 
@@ -101,10 +109,10 @@ export default function HeroSection() {
 						</div>
 						<div className="text-center sm:text-left">
 							<div className="text-sm font-semibold">
-								Trusted by 10,000+ couples
+								Dipercaya oleh 10.000+ pasangan
 							</div>
 							<div className="text-sm text-muted-foreground">
-								Join our growing community today
+								Bergabung dengan komunitas kami hari ini
 							</div>
 						</div>
 					</div>

@@ -12,51 +12,63 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-	{ label: "Home", href: "/" },
-	{ label: "About", href: "/about" },
-	{ label: "Product", href: "/product" },
-	{ label: "Contact", href: "/contact" },
+	{ label: "Beranda", href: "#home" },
+	{ label: "Tentang", href: "#about" },
+	{ label: "Produk", href: "#product" },
+	{ label: "Harga", href: "#pricing" },
+	{ label: "Kontak", href: "#contact" },
 ];
 
 export default function Navbar() {
 	const [isOpen, setIsOpen] = useState(false);
 
+	const handleNavClick = (href: string) => {
+		setIsOpen(false);
+		const el = document.querySelector(href);
+		if (el) {
+			el.scrollIntoView({ behavior: "smooth" });
+		}
+	};
+
 	return (
 		<header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
 			<div className="container mx-auto flex h-16 items-center justify-between px-4">
 				{/* Logo */}
-				<Link to="/" className="flex items-center gap-2">
+				<a href="#home" className="flex items-center gap-2">
 					<span className="text-xl font-bold">
-						diNikah<span className="text-yellow-500">.in</span>
+						diNikah<span className="inline-block text-yellow-500 transition-colors duration-300 dark:text-red-500">.in</span>
 					</span>
-				</Link>
+				</a>
 
 				{/* Desktop Navigation */}
 				<nav className="hidden md:flex items-center gap-6">
 					{navItems.map((item) => (
-						<Link
+						<a
 							key={item.href}
-							to={item.href}
-							className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-							activeProps={{
-								className: "text-foreground font-semibold",
+							href={item.href}
+							onClick={(e) => {
+								e.preventDefault();
+								handleNavClick(item.href);
 							}}
+							className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
 						>
 							{item.label}
-						</Link>
+						</a>
 					))}
 				</nav>
 
 				{/* Desktop Actions */}
 				<div className="hidden md:flex items-center gap-2">
 					<ThemeToggle />
-					<Button
-						variant="outline"
-						size="sm"
-						className="bg-red-500/90 text-white hover:bg-red-600 hover:text-white"
-					>
-						Get Started
-					</Button>
+					<Link to="/dashboard">
+						<Button
+							variant="outline"
+							size="sm"
+							className="bg-red-500/90 text-white hover:bg-red-600 hover:text-white"
+						>
+							Mulai
+						</Button>
+					</Link>
 				</div>
 
 				{/* Mobile Menu Button */}
@@ -81,27 +93,29 @@ export default function Navbar() {
 			>
 				<nav className="flex flex-col gap-2 py-4">
 					{navItems.map((item) => (
-						<Link
+						<a
 							key={item.href}
-							to={item.href}
-							className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-							activeProps={{
-								className: "bg-accent text-foreground font-semibold",
+							href={item.href}
+							onClick={(e) => {
+								e.preventDefault();
+								handleNavClick(item.href);
 							}}
-							onClick={() => setIsOpen(false)}
+							className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
 						>
 							{item.label}
-						</Link>
+						</a>
 					))}
 					<div className="flex items-center gap-2 pt-2 border-t border-border mt-2">
 						<ThemeToggle />
-						<Button
-							variant="outline"
-							size="sm"
-							className="flex-1 bg-red-500 text-white hover:bg-blue-500 hover:text-white"
-						>
-							Get Started
-						</Button>
+						<Link to="/dashboard" className="flex-1">
+							<Button
+								variant="outline"
+								size="sm"
+								className="w-full bg-red-500 text-white hover:bg-blue-500 hover:text-white"
+							>
+								Mulai
+							</Button>
+						</Link>
 					</div>
 				</nav>
 			</div>

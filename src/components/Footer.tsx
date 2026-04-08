@@ -2,9 +2,11 @@ import { Link } from "@tanstack/react-router";
 import { Mail, Phone, MapPin, Instagram } from "lucide-react";
 
 const exploreLinks = [
-	{ label: "Home", href: "/" },
-	{ label: "Product", href: "/product" },
-	{ label: "FAQ", href: "/faq" },
+	{ label: "Beranda", href: "#home" },
+	{ label: "Tentang", href: "#about" },
+	{ label: "Produk", href: "#product" },
+	{ label: "Harga", href: "#pricing" },
+	{ label: "Kontak", href: "#contact" },
 ];
 
 const contactInfo = [
@@ -47,7 +49,10 @@ export default function Footer() {
 					{/* Brand */}
 					<div className="col-span-2 md:col-span-1">
 						<Link to="/" className="text-xl font-bold">
-							diNikah<span className="text-yellow-500">.in</span>
+							diNikah
+							<span className="inline-block text-yellow-500 transition-colors duration-300 dark:text-red-500">
+								.in
+							</span>
 						</Link>
 						<p className="mt-3 text-sm text-muted-foreground">
 							Building great products, one step at a time.
@@ -70,16 +75,23 @@ export default function Footer() {
 
 					{/* Explore */}
 					<div>
-						<h3 className="text-sm font-semibold">Explore</h3>
+						<h3 className="text-sm font-semibold">Jelajahi</h3>
 						<ul className="mt-4 space-y-2">
 							{exploreLinks.map((link) => (
 								<li key={link.href}>
-									<Link
-										to={link.href}
+									<a
+										href={link.href}
+										onClick={(e) => {
+											e.preventDefault();
+											const el = document.querySelector(link.href);
+											if (el) {
+												el.scrollIntoView({ behavior: "smooth" });
+											}
+										}}
 										className="text-sm text-muted-foreground transition-colors hover:text-foreground"
 									>
 										{link.label}
-									</Link>
+									</a>
 								</li>
 							))}
 						</ul>
@@ -87,7 +99,7 @@ export default function Footer() {
 
 					{/* Get In Touch */}
 					<div>
-						<h3 className="text-sm font-semibold">Get In Touch</h3>
+						<h3 className="text-sm font-semibold">Hubungi Kami</h3>
 						<ul className="mt-4 space-y-3">
 							{contactInfo.map(({ icon: Icon, label, href }) => (
 								<li key={label}>
@@ -105,17 +117,17 @@ export default function Footer() {
 
 					{/* Newsletter / CTA */}
 					<div>
-						<h3 className="text-sm font-semibold">Our Team's Service</h3>
+						<h3 className="text-sm font-semibold">Layanan Tim Kami</h3>
 						<p className="mt-3 text-sm text-muted-foreground">
-							Interested in our other services? Check out our portfolio
-							credentials, then contact us afterwards.
+							Tertarik dengan layanan kami lainnya? Lihat portofolio kami, lalu
+							hubungi kami setelahnya.
 						</p>
 						<div className="mt-4 flex gap-2">
 							<button
 								type="submit"
 								className="shrink-0 rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:bg-primary/90"
 							>
-								Download Credentials
+								Unduh Kredensial
 							</button>
 						</div>
 					</div>
@@ -125,11 +137,9 @@ export default function Footer() {
 				<div className="mt-12 border-t border-border pt-8">
 					<div className="flex flex-col items-center justify-between gap-4 md:flex-row">
 						<p className="text-sm text-muted-foreground">
-							© {new Date().getFullYear()} diNikah.in. All rights reserved.
+							© {new Date().getFullYear()} diNikah.in. Hak cipta dilindungi.
 						</p>
-						<p className="text-sm text-muted-foreground">
-							Made with love from our crew.
-						</p>
+						<p className="text-sm text-muted-foreground">Made with love.</p>
 					</div>
 				</div>
 			</div>
